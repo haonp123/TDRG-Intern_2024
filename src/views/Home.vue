@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   //- Header
-  PrimaryHeader 
+  Header 
 
   //- Body
   .body-container 
@@ -12,16 +12,20 @@ div
     div(v-else)
       LargeDeviceView
 
+  //- Footer
+  Footer
+
 
 </template>
   
 <script setup>
-  import {onMounted, ref, watchEffect} from 'vue'
+  import {onMounted, ref} from 'vue'
   
-  import PrimaryHeader from "../components/PrimaryHeader.vue"
+  import Header from "../components/Header/Header.vue"
+  import Footer from "../components/Footer.vue"
   import SlideShow from "../components/SlideShow.vue"
-  import MobileView from '../components/MobileView.vue'
-  import LargeDeviceView from '../components/LargeDeviceView.vue'
+  import MobileView from '../components/Mobile/MobileView.vue'
+  import LargeDeviceView from '../components/LargeDevice/LargeDeviceView.vue'
   
   const isLargeDevice = ref()
   
@@ -43,6 +47,4 @@ div
 </script>
   
 <style lang="stylus" scoped>
-  .body-container
-      padding-bottom 10px
 </style>

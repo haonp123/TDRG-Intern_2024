@@ -1,21 +1,7 @@
 <template lang="pug">
 .header
     //- Login Modal
-    .login-modal(v-if="openLogModal" @click.self="() => openLogModal = false")
-        .login-content
-            CloseIcon.close-btn(@click="() => openLogModal = false" width="20px" height="20px")
-            .log-select
-                p Đăng nhập
-                p Đăng ký mới
-            form
-                .input-field
-                    UserIcon(width="15px" height="15px")
-                    input(type="text" placeholder="Tài khoản")
-                .input-field
-                    LockIcon(width="15px" height="15px")
-                    input(type="password" placeholder="Mật khẩu")
-                a(href="") Quên mật khẩu?
-                button Đăng nhập
+    LoginModal(v-if="openLogModal" :handleClick="toggleOpenLogModal")
 
     .logo-mobile
         router-link.logo-text(:to="{name: 'Home'}") Tàng thư viện
@@ -35,7 +21,7 @@
         router-link(style="display: flex; align-Items: center" :to="{name: 'Login'}")
             UserIcon(width="15px" height="15px" fill="#ed424b")
 
-    button.account-btn(@click="() => openLogModal = true" @mouseover="$event => bookmarkColor = '#fff'", @mouseleave="$event => bookmarkColor = '#000'")
+    button.account-btn(@click="toggleOpenLogModal" @mouseover="$event => bookmarkColor = '#fff'", @mouseleave="$event => bookmarkColor = '#000'")
         BookmarkIcon(width="16px" height="16px" :fill="bookmarkColor")
         p Tài khoản
 </template>
@@ -43,22 +29,27 @@
 <script setup>
 import {ref} from 'vue'
 
-import DownloadIcon from "../assets/svg/download-solid.svg"
-import UserIcon from "../assets/svg/user-solid.svg"
-import SearchIcon from "../assets/svg/magnifying-glass-solid.svg"
-import BookmarkIcon from "../assets/svg/book-bookmark-solid.svg"
-import CloseIcon from "../assets/svg/xmark-solid.svg"
-import LockIcon from "../assets/svg/lock-solid.svg"
+import DownloadIcon from "../../assets/svg/download-solid.svg"
+import UserIcon from "../../assets/svg/user-solid.svg"
+import SearchIcon from "../../assets/svg/magnifying-glass-solid.svg"
+import BookmarkIcon from "../../assets/svg/book-bookmark-solid.svg"
+import CloseIcon from "../../assets/svg/xmark-solid.svg"
 
+import LoginModal from './LogModal.vue'
 
 const bookmarkColor = ref('#000')
+
 const openLogModal = ref(false)
+
+function toggleOpenLogModal() {
+    openLogModal.value = !openLogModal.value
+}
 
 
 </script>
 
 <style lang="stylus" scoped>
-.login-modal
+.log-modal
     position fixed
     top 0
     bottom 0
@@ -179,7 +170,7 @@ const openLogModal = ref(false)
         display block
         width 219px
         height 52px
-        background url('../assets/images/logo-web.png') no-repeat
+        background url('/images/logo-web.png') no-repeat
         background-size 100%
     
     .search-bar 
@@ -230,6 +221,4 @@ const openLogModal = ref(false)
         font-size 14px
         font-style italic
     
-
-
 </style>

@@ -1,12 +1,9 @@
 <template lang="pug">
-router-view
+.app
+  router-view
 </template>
 
-<script setup>
-
-
-</script>
-
-<style>
-
+<style lang="stylus" scoped>
+.app
+  background-color #f6f7f9
 </style>
